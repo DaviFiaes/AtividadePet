@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CenterPets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===================== CABEÇALHO / MENU ===================== -->
+  <header class="cabecalho">
+    <div class="cabecalho-conteudo">
+      <a href="#topo" class="logo">
+        <span class="logo-emoji">🐾</span>
+        <span>CenterPets</span>
+      </a>
+
+      <nav class="menu">
+        <a href="#topo">Início</a>
+        <a href="#anuncios" data-secao="anuncios">Anúncios</a>
+        <a href="#publicar" data-secao="publicar">Publicar animal</a>
+        <button class="botao-tema" id="botao-tema" title="Mudar tema claro/escuro" type="button">🌙</button>
+        <a href="#login" class="menu-btn menu-btn--fora" data-secao="login">Entrar</a>
+        <a href="#cadastro" class="menu-btn menu-btn--cheio" data-secao="cadastro">Cadastrar</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================== HERO (topo da landing page) ===================== -->
+  <section class="hero" id="topo">
+    <div class="hero-texto">
+      <span class="hero-selo">Feito com carinho em Salvador - BA</span>
+      <h1>Todo pet merece <span class="destaque">um lar perto de você</span></h1>
+      <p>O CenterPets conecta pessoas de Salvador que querem adotar com animais que precisam de um lar, e ajuda a encontrar pets que se perderam pelos bairros da cidade.</p>
+      <div class="hero-botoes">
+        <a href="#anuncios" class="botao botao--verde" data-secao="anuncios">Quero adotar 🐶</a>
+        <a href="#publicar" class="botao botao--azul" data-secao="publicar">Publicar um animal</a>
+      </div>
+    </div>
+    <div class="hero-imagem">
+      <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=600&q=80" alt="Cachorro fofo olhando para a câmera">
+    </div>
+  </section>
+
+  <!-- ===================== COMO FUNCIONA ===================== -->
+  <section class="como-funciona">
+    <h2 class="titulo-secao">Como funciona</h2>
+    <div class="passos">
+      <div class="passo">
+        <div class="passo-numero">1</div>
+        <h3>Crie sua conta</h3>
+        <p>Cadastre-se em poucos segundos para publicar e entrar em contato com outros tutores.</p>
+      </div>
+      <div class="passo">
+        <div class="passo-numero">2</div>
+        <h3>Veja os anúncios</h3>
+        <p>Procure animais para adoção ou perdidos em vários bairros de Salvador.</p>
+      </div>
+      <div class="passo">
+        <div class="passo-numero">3</div>
+        <h3>Entre em contato</h3>
+        <p>Fale direto com quem publicou o anúncio e ajude esse pet a encontrar um lar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ANÚNCIOS ===================== -->
+  <!-- esse "lugar-anuncios" marca o lugar da seção na página, pra ela
+       poder voltar pro lugar certo quando o modal fechar -->
+  <div id="lugar-anuncios" hidden></div>
+  <section class="anuncios" id="anuncios">
+    <h2 class="titulo-secao">Anúncios em Salvador</h2>
+    <p class="subtitulo-secao">Confira animais para adoção e animais perdidos em diferentes bairros da cidade.</p>
+
+    <div class="filtros">
+      <input type="text" id="campo-busca" placeholder="🔎 Buscar por bairro (ex: Barra, Itapuã...)">
+      <button class="filtro-botao" data-filtro="todos">Todos</button>
+      <button class="filtro-botao" data-filtro="Cachorro">🐶 Cachorros</button>
+      <button class="filtro-botao" data-filtro="Gato">🐱 Gatos</button>
+    </div>
+
+    <div class="grade-animais" id="lista-animais"><!-- os cards são criados pelo script.js --></div>
+
+    <div class="legenda">
+      <span><span class="bolinha bolinha-verde"></span> Verde = Para adoção</span>
+      <span><span class="bolinha bolinha-vermelha"></span> Vermelho = Perdido</span>
+    </div>
+  </section>
+
+  <!-- ===================== PUBLICAR ANIMAL ===================== -->
+  <div id="lugar-publicar" hidden></div>
+  <section class="publicar" id="publicar">
+    <div class="caixa-formulario">
+      <h2 class="titulo-secao">Publicar um animal</h2>
+      <p class="subtitulo-secao">Preencha os dados abaixo para ajudar esse pet a encontrar um lar.</p>
+
+      <form id="form-publicar">
+        <div class="campo">
+          <label for="pub-nome">Nome do animal (se souber)</label>
+          <input type="text" id="pub-nome" placeholder="Ex: Rex">
+        </div>
+
+        <div class="linha-campos">
+          <div class="campo">
+            <label for="pub-especie">Espécie</label>
+            <select id="pub-especie">
+              <option value="Cachorro">Cachorro</option>
+              <option value="Gato">Gato</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="pub-raca">Raça</label>
+            <input type="text" id="pub-raca" placeholder="Ex: Vira-lata, Labrador...">
+          </div>
+        </div>
+
+        <div class="campo">
+          <label>Situação</label>
+          <div class="opcoes-situacao">
+            <label class="opcao-pill opcao-pill--verde">
+              <input type="radio" name="pub-situacao" value="Para adoção" checked>
+              Para adoção
+            </label>
+            <label class="opcao-pill opcao-pill--vermelha">
+              <input type="radio" name="pub-situacao" value="Perdido">
+              Perdido
+            </label>
+          </div>
+        </div>
+
+        <div class="linha-campos">
+          <div class="campo">
+            <label for="pub-bairro">Bairro</label>
+            <input type="text" id="pub-bairro" placeholder="Ex: Pituba" required>
+          </div>
+          <div class="campo">
+            <label for="pub-telefone">Telefone de contato</label>
+            <input type="text" id="pub-telefone" placeholder="(71) 90000-0000" required>
+          </div>
+        </div>
+
+        <button type="submit" class="botao botao--verde botao--largo">Publicar animal</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== LOGIN ===================== -->
+  <div id="lugar-login" hidden></div>
+  <section class="autenticacao" id="login">
+    <div class="caixa-formulario">
+      <h2 class="titulo-secao">Entrar na sua conta</h2>
+      <p class="subtitulo-secao">Conta de teste: <strong>demo@centerpets.com</strong> / senha <strong>123456</strong></p>
+
+      <form id="form-login">
+        <div class="campo">
+          <label for="login-email">E-mail</label>
+          <input type="email" id="login-email" placeholder="seu@email.com" required>
+        </div>
+        <div class="campo">
+          <label for="login-senha">Senha</label>
+          <input type="password" id="login-senha" placeholder="Sua senha" required>
+        </div>
+        <button type="submit" class="botao botao--verde botao--largo">Entrar</button>
+      </form>
+
+      <p class="troca-formulario">Ainda não tem conta? <a href="#cadastro" data-secao="cadastro">Cadastre-se aqui</a></p>
+    </div>
+  </section>
+
+  <!-- ===================== CADASTRO ===================== -->
+  <div id="lugar-cadastro" hidden></div>
+  <section class="autenticacao" id="cadastro">
+    <div class="caixa-formulario">
+      <h2 class="titulo-secao">Criar sua conta</h2>
+      <p class="subtitulo-secao">É rápido e gratuito.</p>
+
+      <form id="form-cadastro">
+        <div class="campo">
+          <label for="cad-nome">Nome</label>
+          <input type="text" id="cad-nome" placeholder="Seu nome" required>
+        </div>
+        <div class="campo">
+          <label for="cad-email">E-mail</label>
+          <input type="email" id="cad-email" placeholder="seu@email.com" required>
+        </div>
+        <div class="linha-campos">
+          <div class="campo">
+            <label for="cad-senha">Senha</label>
+            <input type="password" id="cad-senha" placeholder="Crie uma senha" minlength="6" required>
+          </div>
+          <div class="campo">
+            <label for="cad-confirmar">Confirmar senha</label>
+            <input type="password" id="cad-confirmar" placeholder="Repita a senha" minlength="6" required>
+          </div>
+        </div>
+        <button type="submit" class="botao botao--verde botao--largo">Cadastrar</button>
+      </form>
+
+      <p class="troca-formulario">Já tem conta? <a href="#login" data-secao="login">Entrar</a></p>
+    </div>
+  </section>
+
+  <!-- ===================== RODAPÉ ===================== -->
+  <footer class="rodape">
+    <div class="rodape-conteudo">
+      <div class="rodape-coluna">
+        <div class="logo logo--rodape">
+          <span class="logo-emoji">🐾</span>
+          <span>CenterPets</span>
+        </div>
+        <p>Conectando pets e pessoas pelos bairros de Salvador, com muito carinho.</p>
+      </div>
+
+      <div class="rodape-coluna">
+        <h4>Navegação</h4>
+        <a href="#topo">Início</a>
+        <a href="#anuncios" data-secao="anuncios">Anúncios</a>
+        <a href="#publicar" data-secao="publicar">Publicar animal</a>
+        <a href="#login" data-secao="login">Entrar</a>
+      </div>
+
+      <div class="rodape-coluna">
+        <h4>Contato</h4>
+        <p>📍 Salvador, Bahia</p>
+        <p>✉️ contato@centerpets.com</p>
+        <p>📞 (71) 90000-0000</p>
+      </div>
+
+      <div class="rodape-coluna">
+        <h4>Redes sociais</h4>
+        <div class="rodape-redes">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <p class="rodape-copyright">© 2026 CenterPets — feito com 💚 para os pets de Salvador.</p>
+  </footer>
+
+  <!-- ===================== MODAL (usado para avisos e detalhes do animal) ===================== -->
+  <div class="modal-fundo" id="modal" hidden>
+    <div class="modal-caixa">
+      <button class="modal-fechar" id="modal-fechar">✕</button>
+      <img id="modal-foto" class="modal-foto" src="" alt="" hidden>
+      <div class="modal-icone" id="modal-icone">🐾</div>
+      <h3 id="modal-titulo">Título</h3>
+      <p id="modal-texto">Texto</p>
+      <div id="modal-lista" class="modal-lista"></div>
+      <button id="modal-ok" class="botao botao--verde botao--largo">OK</button>
+    </div>
+  </div>
+
+  <!-- ===================== MODAL DE SEÇÃO ===================== -->
+  <!-- Esse modal "puxa" a seção clicada (Anúncios, Publicar, Entrar
+       ou Cadastrar) pra dentro de uma caixinha flutuante. Quando
+       fecha, a seção volta pro lugar de origem na página. -->
+  <div class="modal-secao-fundo" id="modal-secao" hidden>
+    <div class="modal-secao-caixa">
+      <button class="modal-fechar" id="modal-secao-fechar">✕</button>
+      <div id="modal-secao-conteudo"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,553 @@
+/* =========================================================
+   CORES E CONFIGURAÇÕES GERAIS
+   (deixamos tudo em variáveis para ser fácil de mudar)
+========================================================= */
+:root {
+  --verde: #2E9E4F;
+  --verde-escuro: #278844;
+  --verde-claro: #EAF7EE;
+  --verde-borda: #BDE5C7;
+
+  --vermelho: #E03A3A;
+  --vermelho-claro: #FDECEC;
+  --vermelho-borda: #F5C2C2;
+
+  --azul: #2F6FD1;
+  --azul-claro: #EAF2FD;
+  --azul-borda: #C3DBF7;
+
+  --texto: #2b2b2b;
+  --texto-fraco: #7c7c7c;
+  --linha: #e6e6e6;
+  --fundo-secao: #fafafa;
+  --fundo-pagina: #ffffff;
+  --fundo-caixa: #ffffff;
+}
+
+/* =========================================================
+   TEMA ESCURO
+   Quando o JS coloca data-tema="escuro" na tag <html>, essas
+   variáveis aqui embaixo substituem as de cima, e como o resto
+   do CSS todo usa var(--isso), o site inteiro muda de cor sozinho.
+========================================================= */
+[data-tema="escuro"] {
+  --texto: #f0f0f0;
+  --texto-fraco: #b5b5b5;
+  --linha: #3a3a3a;
+  --fundo-secao: #1a1a1a;
+  --fundo-pagina: #121212;
+  --fundo-caixa: #1e1e1e;
+
+  --verde-claro: #163d24;
+  --verde-borda: #2f6e42;
+  --vermelho-claro: #3a1f1f;
+  --vermelho-borda: #6e2f2f;
+  --azul-claro: #16233d;
+  --azul-borda: #2f4a6e;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth; /* faz os links do menu rolarem suavemente até a seção */
+}
+
+body {
+  font-family: 'Nunito', system-ui, sans-serif;
+  background: var(--fundo-pagina);
+  color: var(--texto);
+  line-height: 1.5;
+  transition: background .2s ease, color .2s ease;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Título e subtítulo usados em várias seções */
+.titulo-secao {
+  font-size: 28px;
+  font-weight: 800;
+  text-align: center;
+}
+.subtitulo-secao {
+  text-align: center;
+  color: var(--texto-fraco);
+  margin-top: 8px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Botões usados no site inteiro */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 22px;
+  border-radius: 10px;
+  border: none;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: filter .15s, transform .1s;
+}
+.botao:hover { filter: brightness(1.05); transform: translateY(-1px); }
+.botao--verde { background: var(--verde); color: #fff; }
+.botao--azul { background: var(--azul); color: #fff; }
+.botao--largo { width: 100%; }
+
+/* =========================================================
+   CABEÇALHO / MENU FIXO NO TOPO
+========================================================= */
+.cabecalho {
+  position: sticky;
+  top: 0;
+  background: var(--fundo-caixa);
+  border-bottom: 1px solid var(--linha);
+  z-index: 50;
+  transition: background .2s ease, border-color .2s ease;
+}
+.cabecalho-conteudo {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--texto);
+  text-decoration: none;
+}
+.logo-emoji { font-size: 24px; }
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.menu a {
+  color: var(--texto);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14.5px;
+}
+.menu a:hover { color: var(--verde); }
+
+.botao-tema {
+  border: 1.5px solid var(--linha);
+  background: transparent;
+  color: var(--texto);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s ease;
+}
+.botao-tema:hover { background: var(--fundo-secao); }
+.menu-btn {
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+.menu-btn--fora {
+  border: 1.5px solid var(--verde-borda);
+  color: var(--verde-escuro) !important;
+}
+.menu-btn--cheio {
+  background: var(--verde);
+  color: #fff !important;
+}
+
+/* =========================================================
+   HERO (primeira seção, estilo landing page)
+========================================================= */
+.hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 24px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.hero-texto { flex: 1; min-width: 280px; }
+.hero-selo {
+  display: inline-block;
+  background: var(--verde-claro);
+  color: var(--verde-escuro);
+  border: 1px solid var(--verde-borda);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.hero-texto h1 {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.destaque { color: var(--verde); }
+.hero-texto p {
+  color: var(--texto-fraco);
+  font-size: 16px;
+  margin-bottom: 26px;
+  max-width: 460px;
+}
+.hero-botoes { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-imagem { flex: 1; min-width: 260px; }
+.hero-imagem img {
+  border-radius: 20px;
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+/* =========================================================
+   COMO FUNCIONA
+========================================================= */
+.como-funciona {
+  background: var(--fundo-secao);
+  padding: 60px 24px;
+}
+.passos {
+  max-width: 1000px;
+  margin: 36px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.passo {
+  background: #fff;
+  border: 1px solid var(--linha);
+  border-radius: 14px;
+  padding: 26px;
+  text-align: center;
+}
+.passo-numero {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--verde);
+  color: #fff;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+}
+.passo h3 { margin-bottom: 8px; font-size: 17px; }
+.passo p { color: var(--texto-fraco); font-size: 14px; }
+
+/* =========================================================
+   ANÚNCIOS
+========================================================= */
+.anuncios { max-width: 1100px; margin: 0 auto; padding: 70px 24px; }
+
+.filtros {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 30px 0 34px;
+}
+.filtros input {
+  flex: 1;
+  min-width: 220px;
+  border: 1.5px solid var(--linha);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  background: var(--fundo-caixa);
+  color: var(--texto);
+}
+.filtros input:focus { border-color: var(--verde); }
+.filtro-botao {
+  border: 1.5px solid var(--linha);
+  background: var(--fundo-caixa);
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--texto-fraco);
+  cursor: pointer;
+}
+.filtro-botao:hover { background: var(--fundo-secao); }
+.filtro-botao.selecionado {
+  background: var(--verde);
+  border-color: var(--verde);
+  color: #fff;
+}
+
+.grade-animais {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+.card-animal {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1.5px solid transparent;
+  background: var(--fundo-caixa);
+  box-shadow: 0 4px 14px rgba(0,0,0,.05);
+  transition: background .2s ease;
+}
+.card-animal.adocao { border-color: var(--verde-borda); }
+.card-animal.perdido { border-color: var(--vermelho-borda); }
+.card-foto { width: 100%; height: 170px; object-fit: cover; }
+.card-corpo { padding: 16px; }
+.card-nome { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+.card-animal.adocao .card-nome { color: var(--verde); }
+.card-animal.perdido .card-nome { color: var(--vermelho); }
+.card-raca { font-size: 13.5px; color: #666; margin-bottom: 8px; }
+.card-situacao {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+.card-animal.adocao .card-situacao { background: var(--verde-claro); color: var(--verde-escuro); }
+.card-animal.perdido .card-situacao { background: var(--vermelho-claro); color: var(--vermelho); }
+.card-bairro { font-size: 13.5px; color: #555; margin-bottom: 14px; }
+.card-botao {
+  width: 100%;
+  border: none;
+  border-radius: 9px;
+  padding: 11px;
+  color: #fff;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 13.5px;
+  cursor: pointer;
+}
+.card-animal.adocao .card-botao { background: var(--verde); }
+.card-animal.perdido .card-botao { background: var(--vermelho); }
+
+.legenda {
+  display: flex;
+  gap: 26px;
+  justify-content: center;
+  margin-top: 30px;
+  font-size: 13px;
+  color: #555;
+}
+.bolinha { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+.bolinha-verde { background: var(--verde); }
+.bolinha-vermelha { background: var(--vermelho); }
+
+/* =========================================================
+   FORMULÁRIOS (publicar, login, cadastro)
+========================================================= */
+.publicar, .autenticacao {
+  background: var(--fundo-secao);
+  padding: 70px 24px;
+  display: flex;
+  justify-content: center;
+}
+.caixa-formulario {
+  width: 100%;
+  max-width: 460px;
+  background: var(--fundo-caixa);
+  border: 1px solid var(--linha);
+  border-radius: 18px;
+  padding: 34px;
+  transition: background .2s ease;
+}
+.caixa-formulario form { margin-top: 22px; display: flex; flex-direction: column; gap: 16px; }
+.campo { display: flex; flex-direction: column; gap: 6px; }
+.campo label { font-size: 13.5px; font-weight: 700; color: #444; }
+.campo input, .campo select {
+  border: 1.5px solid var(--linha);
+  border-radius: 9px;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  background: var(--fundo-caixa);
+  color: var(--texto);
+}
+.campo input:focus, .campo select:focus { border-color: var(--verde); }
+.linha-campos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.opcoes-situacao { display: flex; gap: 10px; }
+.opcao-pill {
+  flex: 1;
+  text-align: center;
+  border-radius: 9px;
+  padding: 12px;
+  font-weight: 700;
+  font-size: 13.5px;
+  cursor: pointer;
+  border: 1.5px solid;
+}
+.opcao-pill input { margin-right: 6px; }
+.opcao-pill--verde { border-color: var(--verde-borda); color: var(--verde-escuro); }
+.opcao-pill--vermelha { border-color: var(--vermelho-borda); color: var(--vermelho); }
+
+.troca-formulario { text-align: center; margin-top: 18px; font-size: 13.5px; color: var(--texto-fraco); }
+.troca-formulario a { color: var(--verde); font-weight: 700; text-decoration: underline; }
+
+/* =========================================================
+   RODAPÉ
+========================================================= */
+.rodape { background: #222; color: #ccc; padding: 50px 24px 20px; }
+.rodape-conteudo {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 30px;
+}
+.logo--rodape { color: #fff; margin-bottom: 10px; }
+.rodape-coluna p, .rodape-coluna a {
+  display: block;
+  color: #aaa;
+  text-decoration: none;
+  font-size: 13.5px;
+  margin-bottom: 8px;
+}
+.rodape-coluna a:hover { color: #fff; }
+.rodape-coluna h4 { color: #fff; font-size: 14px; margin-bottom: 12px; }
+.rodape-redes { display: flex; flex-direction: column; }
+.rodape-copyright {
+  text-align: center;
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid #3a3a3a;
+  font-size: 12.5px;
+  color: #888;
+}
+
+/* =========================================================
+   MODAL (avisos e detalhes do animal)
+========================================================= */
+.modal-fundo {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 100;
+}
+/* Isso aqui é o pulo do gato: sem essa linha, o "hidden" do HTML
+   não consegue vencer o "display: flex" ali de cima, e o modal
+   fica aparecendo na tela o tempo todo. */
+.modal-fundo[hidden] {
+  display: none;
+}
+.modal-caixa {
+  background: var(--fundo-caixa);
+  color: var(--texto);
+  border-radius: 18px;
+  padding: 30px 28px 26px;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal-fechar {
+  position: absolute;
+  top: 14px; right: 16px;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  color: #aaa;
+  cursor: pointer;
+}
+.modal-foto { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; }
+.modal-icone { font-size: 40px; margin-bottom: 10px; }
+.modal-caixa h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+.modal-caixa p { color: var(--texto-fraco); font-size: 14px; margin-bottom: 14px; }
+.modal-lista { text-align: left; margin-bottom: 18px; }
+.modal-lista p { color: var(--texto); font-size: 14px; margin-bottom: 6px; }
+.modal-lista strong { color: #555; }
+
+/* =========================================================
+   MODAL DE SEÇÃO
+   (usado quando clicamos em Anúncios / Publicar / Entrar /
+   Cadastrar no menu — a seção é "puxada" pra dentro dele)
+========================================================= */
+.modal-secao-fundo {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow-y: auto;
+  z-index: 200;
+}
+.modal-secao-fundo[hidden] {
+  display: none;
+}
+.modal-secao-caixa {
+  background: var(--fundo-caixa);
+  border-radius: 18px;
+  width: 100%;
+  max-width: 680px;
+  position: relative;
+  margin: auto;
+}
+.modal-secao-caixa .modal-fechar {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  background: var(--fundo-secao);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  z-index: 5;
+}
+
+/* quando uma seção é movida pra dentro do modal, ela ganha essa
+   classe: tira o fundo colorido e o espaçamento gigante que ela
+   tinha na página, porque agora ela já está dentro de uma caixa */
+.em-modal {
+  background: transparent !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 34px 26px !important;
+}
+
+/* =========================================================
+   RESPONSIVO (celular)
+========================================================= */
+@media (max-width: 720px) {
+  .passos { grid-template-columns: 1fr; }
+  .rodape-conteudo { grid-template-columns: 1fr 1fr; }
+  .linha-campos { grid-template-columns: 1fr; }
+  .hero-texto h1 { font-size: 30px; }
+}
